@@ -1,0 +1,17 @@
+# Fichiers système
+Thumbs.db
+.DS_Store
+
+# Fichiers d'éditeurs et IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers temporaires et logs
+*.log
+tmp/
+cache/
+
+# Éventuels fichiers de configuration secrets
+.env

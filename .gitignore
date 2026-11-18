@@ -15,3 +15,9 @@ cache/
 
 # Éventuels fichiers de configuration secrets
 .env
+# Configuration locale (identifiants de la base de données)
+config/database.php
+
+# Fichiers d'outils locaux
+.claude/
+CLAUDE.md

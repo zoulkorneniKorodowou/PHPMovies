@@ -21,3 +21,6 @@ config/database.php
 # Fichiers d'outils locaux
 .claude/
 CLAUDE.md
+
+#mon fichier de connexion a ma base de donnees
+./config/database.php

@@ -33,7 +33,6 @@ if (isset($pageTitle)) {
 
         <button class="options-btn" id="options-btn" aria-label="Menu de navigation">☰</button>
 
-        <!-- Liens du menu -->
         <nav class="nav-menu" id="nav-menu">
             <a href="index.php">Accueil</a>
             <a href="category.php?slug=action">Action</a>
@@ -44,7 +43,6 @@ if (isset($pageTitle)) {
                 <a href="profile.php">Mon Profil</a>
                 <a href="actions/logout.php" class="btn btn-outline">Déconnexion</a>
             <?php else: ?>
-                <!-- Menu visiteur non connecté -->
                 <a href="login.php" class="btn btn-outline">Connexion</a>
                 <a href="register.php" class="btn btn-primary">Inscription</a>
             <?php endif; ?>
@@ -53,3 +51,12 @@ if (isset($pageTitle)) {
 </header>
 
 <main class="main-container">
+
+<?php if (function_exists('get_flash')): ?>
+    <?php $flash = get_flash(); ?>
+    <?php if ($flash !== null): ?>
+        <div class="flash flash--<?php echo htmlspecialchars($flash['type']); ?>">
+            <?php echo htmlspecialchars($flash['message']); ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

@@ -14,7 +14,6 @@ function e(string $value): string {
     return htmlspecialchars($value, ENT_QUOTES,'UTF-8');
 }
 
-$_SESSION['USER_id'] = 5;
 //Indique si un utilisateur est connecter
 function is_logged_in(): bool {
     return isset($_SESSION['user_id']);
@@ -27,5 +26,17 @@ function current_user_id(): ?int {
     } else {
         return (int) $_SESSION['user_id'];
     }
+}
 
+//envoie le visiteur vers une autre page du site, puis arrete le script
+function redirect(string $path): void {
+    header('Location: ' . BASE_URL . $path);
+    exit;
+}
+
+//bloque la page aux visiteurs non connecter: ils sont renvoyer vers la connexion
+function require_login(): void{
+    if (!is_logged_in()){
+        redirect('/pages/login.php');
+    }
 }

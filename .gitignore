@@ -22,5 +22,3 @@ config/database.php
 .claude/
 CLAUDE.md
 
-#mon fichier de connexion a ma base de donnees
-./config/database.php

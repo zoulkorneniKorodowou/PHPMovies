@@ -39,3 +39,46 @@ function update_password($pdo, $user_id, $old_password, $new_password)
 
     return 'ok';
 }
+
+function checkout($pdo, $user_id)
+{
+    $sql = 'SELECT cart_items.movie_id, movies.price
+            FROM cart_items
+            JOIN movies ON cart_items.movie_id = movies.id_movie
+            WHERE cart_items.user_id = :user_id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['user_id' => $user_id]);
+    $items = $stmt->fetchAll();
+
+    if (empty($items)) {
+        return 'empty_cart';
+    }
+
+    try {
+        $pdo->beginTransaction();
+
+        $insert_sql = 'INSERT INTO purchases (user_id, movie_id, price_paid)
+                       VALUES (:user_id, :movie_id, :price_paid)';
+        $insert_stmt = $pdo->prepare($insert_sql);
+
+        foreach ($items as $item) {
+            $insert_stmt->execute([
+                'user_id' => $user_id,
+                'movie_id' => $item['movie_id'],
+                'price_paid' => $item['price']
+            ]);
+        }
+
+        $delete_sql = 'DELETE FROM cart_items WHERE user_id = :user_id';
+        $delete_stmt = $pdo->prepare($delete_sql);
+        $delete_stmt->execute(['user_id' => $user_id]);
+
+        $pdo->commit();
+        return 'ok';
+    } catch (Exception $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        return 'error';
+    }
+}

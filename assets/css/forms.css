@@ -93,3 +93,35 @@
     border: 1px solid #22c55e;
     color: #86efac;
 }
+
+/* Texte d'aide sous un champ */
+.form-help {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Message d'erreur sous un champ */
+.form-error {
+    font-size: 0.85rem;
+    color: #fca5a5;
+}
+
+/* Champ en erreur : bordure rouge */
+.form-group input[aria-invalid="true"] {
+    border-color: #ef4444;
+}
+
+/* Contour visible au clavier (accessibilité) */
+.form-group input:focus-visible,
+.form-actions .btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Mobile : le formulaire prend toute la largeur */
+@media (max-width: 480px) {
+    .form-container {
+        margin: 16px auto;
+        padding: 20px;
+    }
+}

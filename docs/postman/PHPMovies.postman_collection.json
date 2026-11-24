@@ -251,6 +251,126 @@
           }
         }
       ]
+    },
+    {
+      "name": "Réalisateurs",
+      "item": [
+        {
+          "name": "GET Detail realisateur par id=1 (200)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Le réalisateur contient son nom et la liste de ses films\", function () {",
+                  "    const body = pm.response.json();",
+                  "    pm.expect(body.success).to.eql(true);",
+                  "    pm.expect(body.data).to.have.property(\"name\");",
+                  "    pm.expect(body.data).to.have.property(\"movies\");",
+                  "    pm.expect(body.data.movies).to.be.an(\"array\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/directors.php?id=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "directors.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Realisateur id invalide (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/directors.php?id=abc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "directors.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "abc"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET Realisateur inexistant id=9999 (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/directors.php?id=9999",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "directors.php"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "9999"
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }

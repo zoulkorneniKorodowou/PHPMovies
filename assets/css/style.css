@@ -259,6 +259,22 @@ a {
     color: var(--accent);
 }
 
+.movie-detail {
+    display: flex;
+    gap: 40px;
+}
+
+.movie-detail img {
+    width: 280px;
+    border-radius: var(--radius);
+}
+
+.movie-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
 .footer {
     background-color: var(--bg-card);
     border-top: 1px solid var(--border-color);

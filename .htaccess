@@ -1,0 +1,5 @@
+# Page d'erreur personnalisée (chemin à adapter si le projet est installé ailleurs, comme BASE_URL)
+ErrorDocument 404 /PROJET_PHP/PHPMovies/pages/404.php
+
+# Interdit l'affichage de la liste des fichiers d'un dossier sans index
+Options -Indexes

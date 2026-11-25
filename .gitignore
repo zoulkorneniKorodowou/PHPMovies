@@ -1,0 +1,24 @@
+# Fichiers système
+Thumbs.db
+.DS_Store
+
+# Fichiers d'éditeurs et IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers temporaires et logs
+*.log
+tmp/
+cache/
+
+# Éventuels fichiers de configuration secrets
+.env
+# Configuration locale (identifiants de la base de données)
+config/database.php
+
+# Fichiers d'outils locaux
+.claude/
+CLAUDE.md
+

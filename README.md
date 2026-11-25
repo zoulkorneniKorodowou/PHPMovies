@@ -21,7 +21,7 @@ On peut parcourir les films par catégorie (Action, Drame), voir le détail d'un
    git clone https://github.com/zoulkorneniKorodowou/PHPMovies.git
    ```
 
-2. Copier `config/database.example.php` en `config/database.php` et l'adapter si besoin (identifiants MySQL, `BASE_URL`).
+2. 2. Copier `config/database.example.php` en `config/database.php` et l'adapter si besoin (identifiants MySQL, `BASE_URL`). Si le projet n'est pas installé dans `PROJET_PHP/PHPMovies`, modifier aussi le chemin `ErrorDocument` du fichier `.htaccess`.
 
 3. Démarrer Apache et MySQL, puis importer dans phpMyAdmin les scripts du dossier `sql/` dans l'ordre :
 
@@ -34,6 +34,16 @@ On peut parcourir les films par catégorie (Action, Drame), voir le détail d'un
 
 4. Ouvrir http://localhost/PROJET_PHP/PHPMovies/ et créer un compte depuis la page Inscription.
 
+## Base de données
+
+Les scripts du dossier `sql/` génèrent toute la base `phpmovies` :
+
+- `01_catalogue.sql` : création de la base et des tables `categories`, `directors`, `movies`, `actors`, `movie_actor`
+- `02_users.sql` : tables `users`, `cart_items` (panier) et `purchases` (achats)
+- `03_fixtures_catalogue.sql` et `04_fixtures_casting.sql` : données de test (20 films, 14 réalisateurs, 49 acteurs)
+
+Le script `01` supprime et recrée la base, il faut donc relancer les quatre scripts dans l'ordre après l'avoir exécuté.
+
 ## API
 
 Toutes les routes sont dans le dossier `api/` et renvoient du JSON.
@@ -43,7 +53,7 @@ Toutes les routes sont dans le dossier `api/` et renvoient du JSON.
 - Panier : `cart.php` (GET, POST, DELETE)
 - Achats : `checkout.php`, `purchases.php`, `password.php`
 
-Les collections Postman et l'environnement sont dans `docs/postman/`. Il suffit de les importer dans Postman et de choisir l'environnement local.
+Une collection Postman est disponible dans `docs/postman/`. Après l'import, modifier la variable `base_url` de la collection avec l'adresse du projet, par exemple `http://localhost/PROJET_PHP/PHPMovies`.
 
 ## Sécurité
 

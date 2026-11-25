@@ -44,3 +44,21 @@ function create_user(PDO $pdo, string $username, string $email, string $password
     ]);
     return (int) $pdo->lastInsertId();
 }
+
+// Renvoie le profil public d'un utilisateur (sans mot de passe), ou null
+function find_user_by_id(PDO $pdo, int $id_user): ?array
+{
+    $stmt = $pdo->prepare(
+        'SELECT id_user, username, email, created_at
+         FROM users
+         WHERE id_user = :id_user'
+    );
+    $stmt->execute(['id_user' => $id_user]);
+    $user = $stmt->fetch();
+
+    if ($user === false) {
+        return null;
+    }
+
+    return $user;
+}

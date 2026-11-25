@@ -77,3 +77,29 @@ function csrf_check():void {
         exit('Requete invalide. Rechargez la page et reessayez.');
     }
 }
+
+// Connecte l'utilisateur : nouvel identifiant de session, puis infos rangées en session
+function login_user(array $user): void
+{
+    session_regenerate_id(true);
+    $_SESSION['user_id'] = (int) $user['id_user'];
+    $_SESSION['username'] = $user['username'];
+}
+
+// Déconnecte l'utilisateur : vide la session, supprime son cookie et la détruit
+function logout_user(): void
+{
+    $_SESSION = [];
+
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', [
+        'expires'  => time() - 3600,
+        'path'     => $params['path'],
+        'domain'   => $params['domain'],
+        'secure'   => $params['secure'],
+        'httponly' => $params['httponly'],
+        'samesite' => $params['samesite'],
+    ]);
+
+    session_destroy();
+}

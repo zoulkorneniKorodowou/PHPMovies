@@ -1,30 +1,31 @@
 <?php
-$token = '';
-if (isset($_SESSION['csrf_token'])) {
-    $token = $_SESSION['csrf_token'];
-}
+/**
+ * Carte d'un film, à inclure dans une boucle foreach.
+ * @var array $movie Le film à afficher (id_movie, title, poster, price)
+ */
 ?>
 <div class="movie-card">
-    <a href="movie.php?id=<?php echo $movie['id_movie']; ?>">
-        <img src="<?php echo htmlspecialchars($movie['poster']); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
+    <a href="<?= e(BASE_URL) ?>/pages/movie.php?id=<?= (int) $movie['id_movie'] ?>">
+        <img src="<?= e(BASE_URL . '/' . $movie['poster']) ?>"
+             alt="Affiche de <?= e($movie['title']) ?>" loading="lazy">
     </a>
 
     <div class="movie-card-info">
         <h3>
-            <a href="movie.php?id=<?php echo $movie['id_movie']; ?>">
-                <?php echo htmlspecialchars($movie['title']); ?>
+            <a href="<?= e(BASE_URL) ?>/pages/movie.php?id=<?= (int) $movie['id_movie'] ?>">
+                <?= e($movie['title']) ?>
             </a>
         </h3>
 
         <div class="movie-card-bottom">
-            <span class="price"><?php echo $movie['price']; ?> €</span>
+            <span class="price"><?= number_format((float) $movie['price'], 2, ',', ' ') ?> €</span>
 
-            
-            <form action="actions/cart_add.php" method="POST">
-                <input type="hidden" name="movie_id" value="<?php echo $movie['id_movie']; ?>">
-                <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
-                <button type="submit" class="btn btn-primary btn-sm">+ Panier</button>
+            <form action="<?= e(BASE_URL) ?>/actions/cart_add.php" method="post">
+                <input type="hidden" name="movie_id" value="<?= (int) $movie['id_movie'] ?>">
+                <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                <button type="submit" class="btn btn-primary btn-sm"aria-label="Ajouter <?= e($movie['title']) ?> au panier">+ Panier</button>            
             </form>
         </div>
     </div>
 </div>
+

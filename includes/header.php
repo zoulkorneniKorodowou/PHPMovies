@@ -43,7 +43,10 @@ if (isset($pageTitle)) {
             <?php if ($is_logged): ?>
                 <a href="<?php echo BASE_URL; ?>/pages/cart.php">Panier</a>
                 <a href="<?php echo BASE_URL; ?>/pages/profile.php">Mon Profil</a>
-                <a href="<?php echo BASE_URL; ?>/actions/logout.php" class="btn btn-outline">Déconnexion</a>
+                <form action="<?php echo BASE_URL; ?>/actions/logout.php" method="post" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+                    <button type="submit" class="btn btn-outline">Déconnexion</button>
+                </form>
             <?php else: ?>
                 <a href="<?php echo BASE_URL; ?>/pages/login.php" class="btn btn-outline">Connexion</a>
                 <a href="<?php echo BASE_URL; ?>/pages/register.php" class="btn btn-primary">Inscription</a>

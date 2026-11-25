@@ -125,3 +125,20 @@
         padding: 20px;
     }
 }
+
+/* Bouton de déconnexion du header (formulaire POST) */
+.logout-form {
+    display: inline-flex;
+}
+
+.logout-form .btn {
+    font: inherit;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .logout-form,
+    .logout-form .btn {
+        width: 100%;
+    }
+}

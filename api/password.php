@@ -1,40 +1,38 @@
 <?php
 
-require_once '../config/database.php';
-require_once '../includes/api.php';
-require_once '../includes/data/purchases.php';
+// PUT api/password.php : change le mot de passe de l'utilisateur connecté
+// Corps JSON attendu : { "old_password": "...", "new_password": "..." }
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/api.php';
+require_once __DIR__ . '/../includes/data/purchases.php';
 
 require_method('PUT');
+$user_id = api_require_login();
 
-if (!isset($_SESSION['user_id'])) {
-    json_error('Utilisateur non authentifié', 401);
+$body = read_json_body();
+$old_password = $body['old_password'] ?? '';
+$new_password = $body['new_password'] ?? '';
+
+if (!is_string($old_password) || !is_string($new_password) || $old_password === '' || $new_password === '') {
+    json_error('Ancien et nouveau mot de passe requis.', 400);
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
-
-$old_password = $data['old_password'] ?? '';
-$new_password = $data['new_password'] ?? '';
-
-if (empty($old_password) || empty($new_password)) {
-    json_error('Ancien et nouveau mot de passe requis', 400);
+if (strlen($new_password) < 8) {
+    json_error('Le nouveau mot de passe doit contenir au moins 8 caractères.', 400);
 }
 
-if (strlen($new_password) < 6) {
-    json_error('Le nouveau mot de passe doit contenir au moins 6 caractères', 400);
-}
-
-$result = update_password($pdo, (int) $_SESSION['user_id'], $old_password, $new_password);
+$result = update_password($pdo, $user_id, $old_password, $new_password);
 
 if ($result === 'wrong_password') {
-    json_error('Ancien mot de passe incorrect', 401);
+    json_error('Ancien mot de passe incorrect.', 401);
 }
 
 if ($result !== 'ok') {
-    json_error('Utilisateur introuvable', 404);
+    json_error('Utilisateur introuvable.', 404);
 }
 
-json_response(['message' => 'Mot de passe mis à jour avec succès'], 200);
+session_regenerate_id(true);
+
+json_response(['message' => 'Mot de passe mis à jour avec succès.']);

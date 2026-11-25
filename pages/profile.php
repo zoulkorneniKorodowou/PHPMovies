@@ -1,35 +1,33 @@
 <?php
+
+// Page profil : achats de l'utilisateur et changement de mot de passe
+
 require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../includes/functions.php';
+require_once __DIR__ . '/../includes/auth_check.php';
 require_once __DIR__ . '/../includes/data/purchases.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ' . BASE_URL . '/pages/login.php');
-    exit;
-}
-
-$user_id = (int) $_SESSION['user_id'];
+$user_id = current_user_id();
 $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $old_password = $_POST['old_password'] ?? '';
-    $new_password = $_POST['new_password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
+    csrf_check();
 
-    if (empty($old_password) || empty($new_password) || empty($confirm_password)) {
+    $old_password = is_string($_POST['old_password'] ?? null) ? $_POST['old_password'] : '';
+    $new_password = is_string($_POST['new_password'] ?? null) ? $_POST['new_password'] : '';
+    $confirm_password = is_string($_POST['confirm_password'] ?? null) ? $_POST['confirm_password'] : '';
+
+    if ($old_password === '' || $new_password === '' || $confirm_password === '') {
         $error = 'Tous les champs sont obligatoires.';
     } elseif ($new_password !== $confirm_password) {
         $error = 'Les nouveaux mots de passe ne correspondent pas.';
-    } elseif (strlen($new_password) < 6) {
-        $error = 'Le nouveau mot de passe doit contenir au moins 6 caractères.';
+    } elseif (strlen($new_password) < 8) {
+        $error = 'Le nouveau mot de passe doit contenir au moins 8 caractères.';
     } else {
         $result = update_password($pdo, $user_id, $old_password, $new_password);
+
         if ($result === 'ok') {
+            session_regenerate_id(true);
             $success = 'Votre mot de passe a été modifié avec succès.';
         } elseif ($result === 'wrong_password') {
             $error = "L'ancien mot de passe est incorrect.";
@@ -81,20 +79,18 @@ require_once __DIR__ . '/../includes/header.php';
         <?php endif; ?>
 
         <form method="POST" action="">
+            <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
             <div class="form-group">
                 <label for="old_password">Ancien mot de passe</label>
-                <input type="password" id="old_password" name="old_password" required>
-            </div>
+                <input type="password" id="old_password" name="old_password" required autocomplete="current-password">            </div>
 
             <div class="form-group">
                 <label for="new_password">Nouveau mot de passe</label>
-                <input type="password" id="new_password" name="new_password" required>
-            </div>
+                <input type="password" id="new_password" name="new_password" required minlength="8" autocomplete="new-password">            </div>
 
             <div class="form-group">
                 <label for="confirm_password">Confirmer le nouveau mot de passe</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
+                <input type="password" id="confirm_password" name="confirm_password" required minlength="8" autocomplete="new-password">            </div>
 
             <button type="submit" class="btn btn-primary">Mettre à jour</button>
         </form>

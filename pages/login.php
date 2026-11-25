@@ -30,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle = 'Connexion - PHPMovies';
+$pageTitle = 'Connexion - WônouMovies';
+$pageDescription = 'Connectez-vous à votre compte WônouMovies pour accéder à votre panier et vos achats.';
 require __DIR__ . '/../includes/header.php';
 ?>
 

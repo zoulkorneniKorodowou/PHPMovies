@@ -10,7 +10,13 @@ $is_logged = isset($_SESSION['user_id']);
 if (isset($pageTitle)) {
     $titre = htmlspecialchars($pageTitle);
 } else {
-    $titre = 'PHPMovies';
+    $titre = 'WônouMovies - Catalogue de films';
+}
+
+if (isset($pageDescription)) {
+    $metaDescription = htmlspecialchars($pageDescription);
+} else {
+    $metaDescription = 'Découvrez, recherchez et achetez vos films cultes en streaming sur WônouMovies.';
 }
 ?>
 <!DOCTYPE html>
@@ -18,6 +24,7 @@ if (isset($pageTitle)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<?php echo $metaDescription; ?>">
     <title><?php echo $titre; ?></title>
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/forms.css">

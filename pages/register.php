@@ -51,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle = 'Inscription - PHPMovies';
+$pageTitle = 'Inscription - WônouMovies';
+$pageDescription = 'Créez gratuitement votre compte sur WônouMovies pour acheter vos films préférés.';
 require __DIR__ . '/../includes/header.php';
 ?>
 

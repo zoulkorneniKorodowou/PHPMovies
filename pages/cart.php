@@ -10,7 +10,8 @@ $items = get_cart_items($pdo, current_user_id());
 $total = get_cart_total($items);
 $count = count($items);
 
-$pageTitle = 'Mon panier - PHPMovies';
+$pageTitle = 'Mon panier - WônouMovies';
+$pageDescription = 'Consultez et validez les films sélectionnés dans votre panier WônouMovies.';
 require __DIR__ . '/../includes/header.php';
 ?>
 

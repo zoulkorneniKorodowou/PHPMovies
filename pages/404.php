@@ -7,7 +7,8 @@ require_once __DIR__ . '/../includes/functions.php';
 
 http_response_code(404);
 
-$pageTitle = 'Page introuvable - PHPMovies';
+$pageTitle = 'Page introuvable - WônouMovies';
+$pageDescription = 'La page demandée est introuvable sur WônouMovies.';
 require __DIR__ . '/../includes/header.php';
 ?>
 

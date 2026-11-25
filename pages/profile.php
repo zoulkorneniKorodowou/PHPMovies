@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result === 'ok') {
             $success = 'Votre mot de passe a été modifié avec succès.';
         } elseif ($result === 'wrong_password') {
-            $error = 'L\'ancien mot de passe est incorrect.';
+            $error = "L'ancien mot de passe est incorrect.";
         } else {
             $error = 'Une erreur est survenue.';
         }
@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $purchases = get_purchases($pdo, $user_id);
-$pageTitle = 'Mon Profil - PHPMovies';
+$pageTitle = 'Mon Profil - WônouMovies';
+$pageDescription = "Retrouvez l'historique de vos films achetés et gérez votre mot de passe sur WônouMovies.";
 require_once __DIR__ . '/../includes/header.php';
 ?>
 

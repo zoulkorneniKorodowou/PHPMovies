@@ -16,7 +16,10 @@ if ($director == null) {
 }
 
 $movies = $director['movies'];
-$pageTitle = htmlspecialchars($director['name']) . ' - PHPMovies';
+$pageTitle = $director['name'] . ' - WônouMovies';
+$pageDescription = !empty($director['bio'])
+    ? mb_substr($director['bio'], 0, 155)
+    : 'Découvrez la filmographie du réalisateur ' . $director['name'] . ' sur WônouMovies.';
 require_once __DIR__ . '/../includes/header.php';
 ?>
 

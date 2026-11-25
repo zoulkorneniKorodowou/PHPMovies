@@ -16,12 +16,13 @@ if ($category == null) {
 }
 
 $movies = get_movies($pdo, $slug);
-$pageTitle = 'Films ' . htmlspecialchars($category['name']) . ' - PHPMovies';
+$pageTitle = 'Films ' . $category['name'] . ' - WônouMovies';
+$pageDescription = 'Parcourez tous nos films de la catégorie ' . $category['name'] . ' sur WônouMovies.';
 require_once '../includes/header.php';
 ?>
 
 <section>
-    <h2 style="margin-bottom: 24px;">Catégorie : <?php echo htmlspecialchars($category['name']); ?></h2>
+    <h1 style="margin-bottom: 24px;">Catégorie : <?php echo htmlspecialchars($category['name']); ?></h1>
 
     <?php if (empty($movies)): ?>
         <p>Aucun film trouvé dans cette catégorie.</p>

@@ -21,7 +21,10 @@ if ($query !== '') {
 }
 
 $count = count($movies);
-$pageTitle = $query !== '' ? 'Recherche : ' . $query . ' - PHPMovies' : 'Recherche - PHPMovies';
+$pageTitle = $query !== '' ? 'Recherche : ' . $query . ' - WônouMovies' : 'Recherche - WônouMovies';
+$pageDescription = $query !== ''
+    ? 'Résultats de recherche pour « ' . $query . ' » dans le catalogue WônouMovies.'
+    : 'Recherchez un film par titre ou réalisateur sur WônouMovies.';
 require __DIR__ . '/../includes/header.php';
 ?>
 

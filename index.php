@@ -13,20 +13,32 @@ require_once 'includes/header.php';
 
 <?php if ($heroMovie !== null): ?>
 <section class="hero">
-    <div class="hero-bg" style="background-image: url('<?= htmlspecialchars(BASE_URL . '/' . $heroMovie['poster']) ?>');" aria-hidden="true"></div>
+    <div class="hero-bg" style="background-image: url('<?= e(BASE_URL . '/' . $heroMovie['poster']) ?>');" aria-hidden="true"></div>
     <div class="hero-overlay" aria-hidden="true"></div>
 
-    <div class="hero-content">
-        <span class="hero-badge">À l'affiche sur WônouMovies</span>
-        <h1><?= htmlspecialchars($heroMovie['title']) ?></h1>
-        <p>
-            Explorez notre catalogue de films cultes et de nouveautés : parcourez nos genres,
-            recherchez vos réalisateurs favoris et achetez vos vidéos en quelques clics.
-        </p>
-        <div class="hero-actions">
-            <a href="#films-a-la-une" class="btn btn-primary">Voir plus</a>
-            <a href="<?= htmlspecialchars(BASE_URL) ?>/pages/movie.php?id=<?= (int) $heroMovie['id_movie'] ?>" class="btn btn-outline">Découvrir ce film</a>
+    <div class="hero-inner">
+        <div class="hero-text">
+            <span class="hero-badge">Catalogue de films en ligne</span>
+            <h1>Vos films cultes, <span class="hero-highlight">en quelques clics</span></h1>
+            <p>
+                Explorez notre sélection de films d'action et de drames, retrouvez vos réalisateurs
+                préférés et achetez vos vidéos en toute simplicité.
+            </p>
+            <div class="hero-actions">
+                <a href="#films-a-la-une" class="btn btn-primary btn-lg">Parcourir les films</a>
+                <a href="<?= e(BASE_URL) ?>/pages/category.php?slug=action" class="btn btn-outline btn-lg">Action</a>
+                <a href="<?= e(BASE_URL) ?>/pages/category.php?slug=drame" class="btn btn-outline btn-lg">Drame</a>
+            </div>
         </div>
+
+        <a href="<?= e(BASE_URL) ?>/pages/movie.php?id=<?= (int) $heroMovie['id_movie'] ?>" class="hero-feature">
+            <img src="<?= e(BASE_URL . '/' . $heroMovie['poster']) ?>"
+                 alt="Affiche de <?= e($heroMovie['title']) ?>" width="260" height="390">
+            <span class="hero-feature-caption">
+                <span>À l'affiche</span>
+                <strong><?= e($heroMovie['title']) ?></strong>
+            </span>
+        </a>
     </div>
 </section>
 <?php endif; ?>

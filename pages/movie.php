@@ -15,11 +15,6 @@ if ($movie == null) {
     exit;
 }
 
-$csrfToken = '';
-if (isset($_SESSION['csrf_token'])) {
-    $csrfToken = $_SESSION['csrf_token'];
-}
-
 $pageTitle = htmlspecialchars($movie['title']) . ' - PHPMovies';
 require_once '../includes/header.php';
 ?>
@@ -59,12 +54,10 @@ require_once '../includes/header.php';
 
         <p class="price"><?php echo $movie['price']; ?> €</p>
 
-        <form action="<?php echo BASE_URL; ?>/actions/cart_add.php" method="POST">
-            <input type="hidden" name="movie_id" value="<?php echo $movie['id_movie']; ?>">
-            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
-            <button type="button" class="btn-add-cart" data-id="<?= (int) $movie['id_movie'] ?>" data-base-url="<?= BASE_URL ?>">
-                + Panier
-            </button>
+        <form action="<?= e(BASE_URL) ?>/actions/cart_add.php" method="post">
+            <input type="hidden" name="movie_id" value="<?= (int) $movie['id_movie'] ?>">
+            <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+            <button type="submit" class="btn btn-primary">+ Ajouter au panier</button>
         </form>
     </div>
 </div>

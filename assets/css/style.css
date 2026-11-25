@@ -250,18 +250,6 @@ body {
     gap: 20px;
 }
 
-.hero-badge {
-    padding: 5px 14px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    background-color: rgba(245, 158, 11, 0.12);
-    border: 1px solid rgba(245, 158, 11, 0.35);
-    border-radius: 999px;
-}
-
 .hero-text h1 {
     font-size: clamp(2.1rem, 5vw, 3.5rem);
     font-weight: 800;

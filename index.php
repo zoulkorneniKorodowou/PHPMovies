@@ -18,7 +18,6 @@ require_once 'includes/header.php';
 
     <div class="hero-inner">
         <div class="hero-text">
-            <span class="hero-badge">Catalogue de films en ligne</span>
             <h1>Vos films cultes, <span class="hero-highlight">en quelques clics</span></h1>
             <p>
                 Explorez notre sélection de films d'action et de drames, retrouvez vos réalisateurs

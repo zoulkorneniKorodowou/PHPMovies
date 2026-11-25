@@ -11,7 +11,15 @@ require_once 'includes/header.php';
 ?>
 
 <section>
-    <h1 style="margin-bottom: 24px;">Films à la une</h1>
+    <div style="margin-bottom: 32px; padding: 24px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius);">
+        <h1 style="margin-bottom: 10px;">Bienvenue sur WônouMovies</h1>
+        <p style="color: var(--text-muted);">
+            Explorez notre catalogue numérique de films cultes et de nouveautés : parcourez nos sélections par genre,
+            recherchez vos réalisateurs favoris et achetez vos vidéos en quelques clics pour les retrouver à tout moment dans votre espace personnel.
+        </p>
+    </div>
+
+    <h2 style="margin-bottom: 24px;">Films à la une</h2>
 
     <?php if (empty($movies)): ?>
         <p>Aucun film disponible pour le moment.</p>

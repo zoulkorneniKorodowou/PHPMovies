@@ -18,6 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+if (function_exists('csrf_check')) {
+    csrf_check();
+}
+
 $result = checkout($pdo, (int) $_SESSION['user_id']);
 
 if ($result === 'empty_cart') {
